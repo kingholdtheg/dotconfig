@@ -27,12 +27,6 @@ if status is-interactive
     alias d=docker
     alias dc="docker compose"
     alias gcl="git clone"
-    alias gco="git checkout"
-    alias gfo="git fetch origin"
-    alias gl="git pull"
-    alias gp="git push"
-    alias grbm="git rebase main"
-    alias gst="git status"
     alias j=just
     alias k=kubectl
     alias ld=lazydocker
