@@ -23,18 +23,6 @@ end
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
-    # aliases
-    alias d=docker
-    alias dc="docker compose"
-    alias gcl="git clone"
-    alias j=just
-    alias k=kubectl
-    alias ld=lazydocker
-    alias lg=lazygit
-    alias mk=minikube
-    alias n=nvim
-    alias we=watchexec
-
     set -gx ZELLIJ_AUTO_EXIT true # When zellij exits, the shell exits as well.
     set -gx EDITOR nvim # set default editor to neovim
 
