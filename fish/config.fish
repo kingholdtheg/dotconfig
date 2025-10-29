@@ -23,6 +23,12 @@ end
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
+    # aliases
+    alias lg lazygit
+    alias ld lazydocker
+    alias j just
+
+    # environment variables
     set -gx ZELLIJ_AUTO_EXIT true # When zellij exits, the shell exits as well.
     set -gx EDITOR nvim # set default editor to neovim
 
