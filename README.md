@@ -9,44 +9,28 @@ This repository manages configuration files for various development tools. Each 
 ## Prerequisites
 
 - [just](https://just.systems/) - A command runner (similar to make)
-
-### Installing just
-
-**macOS:**
-```bash
-brew install just
-```
-
-**Linux:**
-```bash
-# Using cargo
-cargo install just
-
-# Or download from releases
-# https://github.com/casey/just/releases
-```
+- (that's it!)
 
 ## Quick Start
 
 1. Clone this repository:
-   ```bash
-   git clone <your-repo-url> ~/.dotfiles
-   cd ~/.dotfiles
-   ```
 
 2. Link all configurations:
-   ```bash
+
+   ```sh
    just
    ```
 
 3. Check the status:
-   ```bash
+
+   ```sh
    just status
    ```
 
 ## Usage
 
 ### Link all configurations
+
 ```bash
 just
 # or
@@ -56,21 +40,25 @@ just link
 This creates symbolic links for all tool directories to `$HOME/.config/`.
 
 ### Link a specific tool
+
 ```bash
 just link nvim
 ```
 
 ### Unlink all configurations
+
 ```bash
 just unlink
 ```
 
 ### Unlink a specific tool
+
 ```bash
 just unlink fish
 ```
 
 ### Check link status
+
 ```bash
 just status
 ```
@@ -78,47 +66,47 @@ just status
 Shows which configurations are linked, unlinked, or have conflicts.
 
 ### List available tools
+
 ```bash
 just list
 ```
 
 ### Show help
+
 ```bash
 just help
 ```
 
 ## Structure
 
+This project's structure should follow the form:
+
 ```
 .config/
-├── justfile          # Command runner with sync logic
-├── CLAUDE.md         # Guide for Claude Code
 ├── README.md         # This file
-├── example-tool/     # Example configuration (delete after understanding)
+├── justfile          # Command runner with sync logic
 ├── nvim/             # Neovim configuration
-├── fish/             # Fish shell configuration
-├── wezterm/          # Wezterm terminal configuration
+├── wezterm/          # WezTerm terminal configuration
 └── ...               # Other tool configurations
 ```
 
 ## Adding a New Tool Configuration
 
 1. Create a directory with the tool's name:
+
    ```bash
    mkdir newtool
    ```
 
-2. Add your configuration files:
-   ```bash
-   cp -r /path/to/config/* newtool/
-   ```
-
+2. Add your configuration files.
 3. Link it:
+
    ```bash
    just link newtool
    ```
 
 4. Commit to the repository:
+
    ```bash
    git add newtool
    git commit -m "Add newtool configuration"
@@ -134,6 +122,7 @@ just help
 ## Environment Variables
 
 ### CONFIG_DIR
+
 Override the target directory (default: `$HOME/.config`):
 
 ```bash
@@ -150,20 +139,26 @@ CONFIG_DIR=/custom/path just link
 ## Troubleshooting
 
 ### Permission denied
+
 Ensure you have write permissions to `$HOME/.config/`:
+
 ```bash
 ls -la ~/.config/
 ```
 
 ### Symlink already exists
+
 Use `just status` to see what's linked. Unlink first if needed:
+
 ```bash
 just unlink <tool>
 just link <tool>
 ```
 
 ### Tool not found
+
 Make sure the tool directory exists:
+
 ```bash
 just list
 ```
@@ -171,20 +166,19 @@ just list
 ## Maintenance
 
 ### Update configurations
+
 Since files are symlinked, any changes made to configs (either in this repo or through the tool itself) are automatically reflected in both locations.
 
 ### Sync to a new machine
+
 1. Clone this repository
 2. Install just
 3. Run `just link`
 
 ### Remove this system
+
 ```bash
 just unlink
 ```
 
 This removes all symlinks but keeps your original files.
-
-## License
-
-See LICENSE file for details.
