@@ -155,6 +155,13 @@ test_link_specific() {
     test_start "link specific tool"
     
     local tools=($(get_available_tools))
+    
+    if [ ${#tools[@]} -eq 0 ]; then
+        test_pass
+        echo "  (Skipped: no tools available)"
+        return
+    fi
+    
     local test_tool="${tools[0]}"
     
     cd "$SCRIPT_DIR" && just link "$test_tool" >/dev/null 2>&1
@@ -299,6 +306,13 @@ test_unlink_specific() {
     cd "$SCRIPT_DIR" && just link >/dev/null 2>&1
     
     local tools=($(get_available_tools))
+    
+    if [ ${#tools[@]} -eq 0 ]; then
+        test_pass
+        echo "  (Skipped: no tools available)"
+        return
+    fi
+    
     local test_tool="${tools[0]}"
     
     cd "$SCRIPT_DIR" && just unlink "$test_tool" >/dev/null 2>&1

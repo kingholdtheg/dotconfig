@@ -13,7 +13,7 @@ list:
     set -euo pipefail
     echo "Available tool configurations:"
     for dir in "{{repo_dir}}"/*; do
-        if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ]; then
+        if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ] && [ "$(basename "$dir")" != ".github" ]; then
             tool=$(basename "$dir")
             echo "  - $tool"
         fi
@@ -75,7 +75,7 @@ link TOOL="":
     else
         # Link all tools
         for dir in "{{repo_dir}}"/*; do
-            if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ]; then
+            if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ] && [ "$(basename "$dir")" != ".github" ]; then
                 tool=$(basename "$dir")
                 link_tool "$tool"
             fi
@@ -114,7 +114,7 @@ unlink TOOL="":
     else
         # Unlink all tools
         for dir in "{{repo_dir}}"/*; do
-            if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ]; then
+            if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ] && [ "$(basename "$dir")" != ".github" ]; then
                 tool=$(basename "$dir")
                 unlink_tool "$tool"
             fi
@@ -130,7 +130,7 @@ status:
     echo "  Target: {{config_dir}}"
     echo ""
     for dir in "{{repo_dir}}"/*; do
-        if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ]; then
+        if [ -d "$dir" ] && [ "$(basename "$dir")" != ".git" ] && [ "$(basename "$dir")" != ".github" ]; then
             tool=$(basename "$dir")
             target="{{config_dir}}/$tool"
             source="{{repo_dir}}/$tool"
