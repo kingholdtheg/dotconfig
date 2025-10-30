@@ -129,6 +129,42 @@ Override the target directory (default: `$HOME/.config`):
 CONFIG_DIR=/custom/path just link
 ```
 
+## Testing
+
+This repository includes an automated test bench that verifies all functionality works correctly.
+
+### Running Tests
+
+```bash
+./test.sh
+```
+
+The test bench will:
+- Create a temporary test environment (using `CONFIG_DIR`)
+- Test all recipes: `help`, `list`, `link`, `unlink`, `status`, and default
+- Test linking/unlinking individual tools and all tools
+- Verify the `CONFIG_DIR` environment variable works correctly
+- Clean up after itself
+
+### Test Coverage
+
+The test bench automatically discovers all tools in the repository and tests:
+- Default recipe (links all tools)
+- Help message correctness
+- Listing available tools
+- Linking all tools
+- Linking specific tools
+- Linking some but not all tools
+- Status reporting for linked and unlinked tools
+- Unlinking all tools
+- Unlinking specific tools
+- Unlinking some but not all tools
+- CONFIG_DIR environment variable functionality
+
+### Extensibility
+
+The test bench is designed to be extensible. When you add a new tool configuration directory, the test bench will automatically include it in tests without requiring any code changes.
+
 ## Tips
 
 - **Before linking**: Check what will be linked with `just list`
