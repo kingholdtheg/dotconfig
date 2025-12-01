@@ -27,6 +27,7 @@ if status is-interactive
     alias lg lazygit
     alias ld lazydocker
     alias j just
+    alias n nvim
 
     # environment variables
     set -gx ZELLIJ_AUTO_EXIT true # When zellij exits, the shell exits as well.
