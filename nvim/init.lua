@@ -62,3 +62,20 @@ lspconfig.lua_ls.setup({
 })
 
 vim.lsp.enable("lua_ls") -- enable the lua_ls lsp server
+
+-- setup nvim-tree
+local tree = require("nvim-tree")
+tree.setup({
+  on_attach = function(bufnr)
+    local api = require("nvim-tree.api") -- nvim-tree's api
+
+    -- getter for keymap options
+    local function opts(desc) return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true } end
+
+    -- set default mappings
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- set custom mappings
+    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+  end
+})
