@@ -35,33 +35,30 @@ vim.uv.new_timer():start(0, 2000, vim.schedule_wrap(set_background_from_os)) -- 
 -- set initial background and colorscheme
 set_background_from_os()
 
--- import lspconfig
-local lspconfig = require('lspconfig')
-
--- setup lua_ls
-lspconfig.lua_ls.setup({
-  on_attach = function(client, bufnr)
-    -- setup format on save
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-    end
-  end,
-  -- configure lua ls
+-- configure lua-language-server
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
-      ["format.defaultConfig.max_line_length"] = 'unset', -- disable max line length
-      ["diagnostics.globals"] = { "vim" },                -- register global variables "vim"
-    },
+      workspace = { library = vim.api.nvim_get_runtime_file("", true) }
+    }
   }
 })
 
-vim.lsp.enable("lua_ls") -- enable the lua_ls lsp server
+-- enable lua-language-server
+vim.lsp.enable("lua_ls")
+
+-- format on save if lsp supports it
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    for _, client in ipairs(clients) do
+      if client:supports_method("textDocument/formatting") then
+        vim.lsp.buf.format({ bufnr = 0 })
+        return
+      end
+    end
+  end
+})
 
 -- setup nvim-tree
 local tree = require("nvim-tree")
