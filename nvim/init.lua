@@ -24,6 +24,7 @@ vim.o.colorcolumn = "100"                                                    -- 
 vim.o.expandtab = true                                                       -- <Tab> inserts spaces instead of tabs
 vim.o.number = true                                                          -- enable line numbers
 vim.o.relativenumber = true                                                  -- line numbers are relative to cursor
+vim.o.scrolloff = 8                                                          -- keep 8 lines above or below the cursor
 vim.o.shiftwidth = 2                                                         -- (in|de)dent 2 characters
 vim.o.signcolumn = "yes"                                                     -- always render a sign column
 vim.o.softtabstop = 2                                                        -- <Tab> inserts two charcters
