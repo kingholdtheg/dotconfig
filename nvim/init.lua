@@ -17,24 +17,31 @@ local function get_os_appearance()
   handle:close()
 
   -- return 'dark' or 'light' depending on theme preferenc
-  return result:match("Dark") and 'dark' or 'light'
+  return result:match("Dark") and "dark" or "light"
 end
 
+--- Sets vim's background from the OS's preferred appearance.
 local function set_background_from_os()
+  -- the OS' preferred appearance
   local appearance = get_os_appearance()
-  if vim.o.background ~= appearance then
-    vim.o.background = appearance
+
+  -- if vim's background is already the OS's preferred appearance, return
+  if vim.o.background == appearance then
+    return
   end
+
+  -- set vim's background to OS's preferred ap
+  vim.o.background = appearance
 end
 
 
-vim.cmd.colorscheme 'solarized'                                              -- set colorscheme to solarized
-vim.g.mapleader = ' '                                                        -- set global map <Leader> to <Space>
+vim.cmd.colorscheme("solarized")                                             -- set colorscheme to solarized
+vim.g.mapleader = " "                                                        -- set global map <Leader> to <Space>
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true })                       -- jk escapes insert mode
-vim.keymap.set('n', '<Leader>qa', ':qa<CR>', { noremap = true })             -- leader+qa quits all buffers
-vim.keymap.set('n', '<Leader>qq', ':q<CR>', { noremap = true })              -- leader+qq quits buffer
-vim.keymap.set('n', '<Leader>wa', ':wa<CR>', { noremap = true })             -- leader+wa writes all buffers
-vim.keymap.set('n', '<Leader>ww', ':w<CR>', { noremap = true })              -- leader+ww writes buffer
+vim.keymap.set("n", "<Leader>qa", ":qa<CR>", { noremap = true })             -- leader+qa quits all buffers
+vim.keymap.set("n", "<Leader>qq", ":q<CR>", { noremap = true })              -- leader+qq quits buffer
+vim.keymap.set("n", "<Leader>wa", ":wa<CR>", { noremap = true })             -- leader+wa writes all buffers
+vim.keymap.set("n", "<Leader>ww", ":w<CR>", { noremap = true })              -- leader+ww writes buffer
 vim.o.colorcolumn = "100"                                                    -- color the 100th column
 vim.o.expandtab = true                                                       -- <Tab> inserts spaces instead of tabs
 vim.o.number = true                                                          -- enable line numbers
@@ -54,6 +61,12 @@ set_background_from_os()
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
+      format = {
+        defaultConfig = {
+          call_arg_parentheses = "always", -- always surround call args with parentheses
+          quote_style = "double"           -- always express string literals with double quotes
+        }
+      },
       workspace = { library = vim.api.nvim_get_runtime_file("", true) }
     }
   }
@@ -88,6 +101,6 @@ tree.setup({
     api.config.mappings.default_on_attach(bufnr)
 
     -- set custom mappings
-    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+    vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
   end
 })
