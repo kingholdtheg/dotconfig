@@ -1,7 +1,22 @@
+--- Get light or dark appearance from OS.
+---
+--- If an appearance cannot be gotten, light is returned.
+---
+--- @return "light"|"dark"
 local function get_os_appearance()
+  -- open MacOS dark/light theme preference as a file
   local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+  if handle == nil then
+    return "light" -- failed to open file, default to light
+  end
+
+  -- read the file
   local result = handle:read("*a")
+
+  -- close the file's handle
   handle:close()
+
+  -- return 'dark' or 'light' depending on theme preferenc
   return result:match("Dark") and 'dark' or 'light'
 end
 
