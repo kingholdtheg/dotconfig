@@ -5,30 +5,33 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      -- setup solarized
       require("solarized").setup({ transparent = { enabled = false } })
 
-      -- Sync background with system appearance on macOS
+      --- sync_background sets vim's background option to match the OS' preferred appearance.
+      ---
+      --- If the OS' preference cannot be determined, the background will default to 'light'
       local function sync_background()
-        local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
-        if handle then
-          local result = handle:read("*a")
-          handle:close()
-          if result:match("Dark") then
-            vim.o.background = "dark"
-          else
-            vim.o.background = "light"
+        local background = "light"
+        local file = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+        if file then
+          local preference = file:read("*a")
+          file:close()
+          if preference:match("Dark") then
+            background = "dark"
           end
         end
+        vim.o.background = background
       end
 
       -- Set initial background
       sync_background()
 
-      -- Create an autocmd to check for system appearance changes periodically
-      vim.api.nvim_create_autocmd({ "FocusGained", "VimEnter" }, {
-        callback = sync_background,
-        desc = "Sync background with system appearance",
-      })
+      -- Start a timer that periodically (every 10s) syncs the background
+      local timer = vim.uv.new_timer()
+      if timer then
+        timer:start(10000, 10000, vim.schedule_wrap(sync_background))
+      end
     end,
   },
   -- Configure LazyVim to load Solarized
