@@ -20,8 +20,16 @@ if command -v go &>/dev/null
     fish_add_path --global --move --prepend "$(go env GOPATH)/bin"
 end
 
+# setup ghcup
+if command -v ghcup &>/dev/null
+    fish_add_path --global --move --prepend "$(ghcup whereis bindir)"
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
+
+    # zellij tab auto-naming
+    source (dirname (status filename))/functions/zellij_tab_name.fish
 
     # aliases
     alias lg lazygit
