@@ -2,7 +2,11 @@
 # Renames tab to command while running, resets to directory name when done
 
 function __zellij_rename_tab_to_dir
-    zellij action rename-tab (basename $PWD)
+    if test $PWD = $HOME
+        zellij action rename-tab '~'
+    else
+        zellij action rename-tab (basename $PWD)
+    end
 end
 
 function zellij_tab_name_update_preexec --on-event fish_preexec
