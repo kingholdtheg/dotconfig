@@ -9,6 +9,7 @@ return {
       json = { "biome" },
       jsonc = { "biome" },
       python = { "ruff_organize_imports", "ruff_format" },
+      markdown = { "prettier" },
     },
   },
 }
