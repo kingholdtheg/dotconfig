@@ -25,6 +25,16 @@ if command -v ghcup &>/dev/null
     fish_add_path --global --move --prepend "$(ghcup whereis bindir)"
 end
 
+# setup dotnet@8
+if test -d /opt/homebrew/opt/dotnet@8/bin/ &>/dev/null
+    fish_add_path --global --move --prepend "/opt/homebrew/opt/dotnet@8/bin/"
+end
+
+# setup rancher desktop
+if test -d ~/.rd/bin/
+    fish_add_path --global --move --prepend ~/.rd/bin
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
