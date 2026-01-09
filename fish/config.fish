@@ -31,8 +31,13 @@ if test -d /opt/homebrew/opt/dotnet@8/bin/ &>/dev/null
 end
 
 # setup rancher desktop
-if test -d ~/.rd/bin/
-    fish_add_path --global --move --prepend ~/.rd/bin
+if test -d $HOME/.rd/bin/
+    fish_add_path --global --move --prepend $HOME/.rd/bin
+end
+
+# setup aspire
+if test -d $HOME/.aspire/bin &>/dev/null
+    fish_add_path $HOME/.aspire/bin
 end
 
 if status is-interactive
