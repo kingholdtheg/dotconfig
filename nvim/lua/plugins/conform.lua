@@ -11,5 +11,6 @@ return {
       python = { "ruff_organize_imports", "ruff_format" },
       markdown = { "prettier" },
     },
+    formatters = { prettier = { prepend_args = { "--prose-wrap", "always" } } },
   },
 }
