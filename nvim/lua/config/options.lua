@@ -5,3 +5,4 @@ vim.o.termguicolors = true
 vim.o.background = "light"
 vim.o.exrc = true
 vim.o.colorcolumn = "88,100"
+vim.g.python3_host_prog = "~/.config/nvim/.venv/bin/python"
