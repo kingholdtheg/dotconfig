@@ -1,4 +1,5 @@
 return {
+  { "catppuccin/nvim", enabled = false },
   {
     "EdenEast/nightfox.nvim",
     lazy = false,
